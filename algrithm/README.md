@@ -1,2 +1,0 @@
-# algrithm
-algrithm and datastruct
