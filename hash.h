@@ -1,33 +1,35 @@
 //
 // Created by zybang on 2017/8/15.
 //
-
 #ifndef C_HASH_H
 #define C_HASH_H
 
 #endif //C_HASH_H
-typedef struct _node{
-    string key;
-    string val;
-    _node *next;
-    void node(){
-        key = "";
-        val = "";
+typedef struct bucket{
+    char* key;
+    char* val;
+    bucket *next;
+    bucket(char *k, char *v){
+        key = k;
+        val = v;
         next = nullptr;
     }
-} node;
+};
 
-typedef struct _ht{
-    _node *node[100];
+typedef struct hashTable{
+    bucket *node[100];
     int count;
     int used;
-    void ht(){
+    hashTable(){
         count = 100;
         used = 0;
+        for(int i=0; i<100; i++){
+            node[i] = nullptr;
+        }
     }
-} hashTable;
+};
 
-int hash(hashTable *ht, string key){
+int hashCode(hashTable *ht, string key){
     int size = key.size();
     int code=0;
     for(int i=0; i<size; i++){
@@ -37,26 +39,34 @@ int hash(hashTable *ht, string key){
     return hash;
 }
 
-string get(hashTable *ht, const string key){
-    int hash = hash(ht, key);
-    node *p = ht->node[hash];
-    while(p->next != nullptr){
-        if(key == p->key){
-            return p->val;
+string get(hashTable *ht, string key){
+    int hash = hashCode(ht, key);
+    bucket *p = ht->node[hash];
+    if(nullptr != p){
+        while(p->next != nullptr){
+            if(key == p->key){
+                return p->val;
+            }
         }
     }
-    return nullptr;
+    return "";
 }
 
-int set(hashTable *ht, string key, string val){
-    int hash = hash(ht, key);
-    node *p = ht->node[hash];
-    while(p->next != nullptr){
-        if(key == p->key){
-            p->val = val;
+bool set(hashTable *ht, string key, string val){
+    int hash = hashCode(ht, key);
+    bucket *p = ht->node[hash];
+    if(p != nullptr){
+        while(p->next != nullptr){
+            if(key == p->key){
+                p->val = val;
+            }
         }
+        bucket *tmp = new bucket(key, val);
+        p->next = tmp;
+    }else{
+        bucket *tmp = new bucket(key, val);
+        ht->node[hash] = tmp;
     }
-
-    return 1;
+    return true;
 }
 

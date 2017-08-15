@@ -7,6 +7,18 @@
  * 2	6	3
  * 3	2	5
  * 则Sum的最大值为18（路径为1 3 6 3 5）
+ *
+ * 初始化：
+ * int m[3][3] = {
+ *      {1, 2, 3},
+ *      {4, 5, 6},
+ *      {7, 8, 9},
+ * };
+ * int *matrix[3];
+ * matrix[0] = m[0];
+ * matrix[1] = m[1];
+ * matrix[2] = m[2];
+ * int max = maxSum(matrix, 3, 3);
  **/
 
 #ifndef C_MATRIX1_H
