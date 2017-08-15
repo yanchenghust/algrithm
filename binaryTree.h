@@ -1,6 +1,12 @@
-//
-// Created by zybang on 2017/8/15.
-//
+/**
+ * @author zybang
+ * @time 2017/8/15 15:03
+ * @desc 二叉树相关
+ * 例如：
+ * int nodeArr[10] = {10, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+ * Node *root = buildTree(nodeArr, 10);
+ * destroyTree(root);
+ **/
 #include <deque>
 using namespace std;
 #ifndef C_BINARYTREE_H
@@ -12,8 +18,9 @@ using namespace std;
 #define nullptr NULL
 #endif
 
-
-
+/**
+ * 二叉树节点
+ */
 typedef struct Node{
     int val;
     Node *left;
@@ -25,6 +32,12 @@ typedef struct Node{
     }
 };
 
+/**
+ * 根据数组创建完全二叉树
+ * @param arr
+ * @param size
+ * @return
+ */
 Node* buildTree(int *arr, int size){
     Node *tmp[size];
     for(int i=0; i<size; i++){
@@ -36,6 +49,11 @@ Node* buildTree(int *arr, int size){
     }
     return tmp[0];
 }
+
+/**
+ * 销毁二叉树
+ * @param root
+ */
 void destroyTree(Node *root){
     if(NULL == root){
         return ;
@@ -49,7 +67,10 @@ void destroyTree(Node *root){
     delete(root);
 }
 
-
+/**
+ * 打印每一层的最大值
+ * @param root
+ */
 void printLevelMax(Node *root){
     deque<Node *> q;
     Node *p = root;
@@ -75,10 +96,15 @@ void printLevelMax(Node *root){
             max = p->val > max? p->val: max;
             level ++;
             printf("level: %d, max: %d\n", level, max);
+            max = 0x80000000;
         }
     }
 }
 
+/**
+ * 按层打印二叉树
+ * @param root
+ */
 void printLevelVal(Node *root){
     deque<Node *> q;
     Node *p = root;
