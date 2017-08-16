@@ -39,7 +39,7 @@ int hashCode(hashTable *ht, string key){
     return hash;
 }
 
-string get(hashTable *ht, string key){
+char* get(hashTable *ht, string key){
     int hash = hashCode(ht, key);
     bucket *p = ht->node[hash];
     if(nullptr != p){
