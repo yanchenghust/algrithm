@@ -37,3 +37,17 @@ int lcs(char *str1, char *str2){
     }
     return dp[len1-1][len2-1];
 }
+
+
+bool isSeq(char *seq, char *str){
+    int lenSeq = strlen(seq);
+    int lenStr = strlen(str);
+    int i=0, j=0;
+    while(i<lenSeq && j < lenStr){
+        if(seq[i] == str[j]){
+            i++;
+        }
+        j++;
+    }
+    return i==lenSeq;
+}
