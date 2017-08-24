@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string>
-#include "dp/lcs.h"
+#include "dp/take_coin.h"
 using namespace std;
 #ifndef nullptr
 #define nullptr NULL
@@ -13,9 +13,7 @@ int main() {
 //    key = "key1";
 //    val = get(ht, key);
 //    printf("%s: %s \n", key, val);
-    char str1[]="123456789";
-    char str2[]="173450689";
-    int len = lcs(str1, str2);
-    printf("len: %d", len);
+    int m[4] = {1, 3, 5, 2};
+    printf("len: %d", taskCoin1(m, 4));
     return 0;
 }
